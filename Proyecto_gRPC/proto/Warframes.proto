@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package Warframe;
+
+option go_package = "Proyecto_gRPC/proto;proto";
+
+service WarframeService {
+
+rpc GetWaframeInfo(WarframeRequest) returns ( WarframeResponse);
+rpc getWarameList ( Empty )  returns (stream WarframeResponse);
+rpc addWarframes (stream NewWarframeRequest) returns (AddWarframesResponse);
+rpc GetWarframesByType (stream WarframeTimeRequest) returns (stream WarframeResponse);
+}
+
+message WarframeRequest{
+    string name =1;
+
+}
+
+message WarframeResponse{
+    string name =1;
+    string type =2;
+    int32 level=3;
+   
+}
+
+message NewWarframeRequest{
+    string name =1;
+    string type =2;
+    int32 level=3;
+}
+
+message AddWarframesResponse{
+    int32 count = 1;
+}
+
+message Empty{}
+
+message WarframeTimeRequest{
+    string type =1;
+}
